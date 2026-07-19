@@ -35,7 +35,7 @@ async function loadProjects() {
                 ` : '';
                 
                 return `
-                    <div class="project-card-wrapper project-card">
+                    <div class="project-card-wrapper">
                         ${editBtnHTML}
                         ${deleteBtnHTML}
                         <div class="project-card-inner">
