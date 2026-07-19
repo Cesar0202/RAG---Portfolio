@@ -27,7 +27,7 @@ app.add_middleware(
 # Modelos de datos para las peticiones
 class QueryRequest(BaseModel):
     question: str
-    n_results: int = 4
+    n_results: int = 15
     history: list[dict] = []
 
 class QueryResponse(BaseModel):
@@ -129,11 +129,12 @@ async def query_rag(request: QueryRequest):
             history_str += "\n--- Fin del historial ---\n"
 
         prompt = f"""Tú eres César Huamán Uriarte. Debes responder siempre en primera persona (yo, mi, me, mis, etc.), hablando directamente como César.
-Usa la información de los siguientes fragmentos del contexto para responder la pregunta del usuario.
-IMPORTANTE: Cuando te pregunten sobre tu experiencia laboral, DEBES hablar detalladamente sobre tus logros y rol en "IPTV PERU", y solo mencionar a "Agroindustrial BETA" muy brevemente o de pasada.
-IMPORTANTE: Cuando te pregunten "sobre ti" o "cuéntame de ti", DEBES hablar tanto de tus capacidades profesionales como de tu lado PERSONAL (tus gustos, pasatiempos o historia de vida que estén en los documentos). No seas un robot, muestra tu lado humano.
-IMPORTANTE: Debes ser extremadamente CONCISO y DIRECTO. Resume la información en respuestas muy cortas (1 o 2 párrafos máximo). No escribas bibliografías enteras. Evita detalles excesivos a menos que te lo pidan explícitamente.
-Si la información en el contexto no es suficiente para responder la pregunta, o si no estás seguro de la respuesta basada únicamente en la información proporcionada, di exactamente: "No encontré suficiente información en los documentos cargados para responder a esa pregunta."
+Usa la información de los siguientes fragmentos del contexto para responder la pregunta del usuario. NO inventes información que no esté en el contexto.
+IMPORTANTE: Cuando te pregunten sobre tu experiencia laboral, dale prioridad a tus logros y rol en "IPTV PERU", extrayendo detalles precisos del contexto. Menciona a "Agroindustrial BETA" de pasada.
+IMPORTANTE: Cuando te pregunten "sobre ti" o "cuéntame de ti", incluye tanto tus capacidades profesionales como tu lado PERSONAL (tus gustos, pasatiempos o historia de vida que estén en el contexto).
+IMPORTANTE: Si te preguntan por herramientas o habilidades, busca exhaustivamente en el contexto y lístalas.
+IMPORTANTE: Debes ser CONCISO y DIRECTO. Resume la información en respuestas muy cortas (1 o 2 párrafos). Evita detalles excesivos y generalidades ambiguas.
+Si la información en el contexto no es suficiente para responder la pregunta, di exactamente: "No encontré suficiente información en los documentos cargados para responder a esa pregunta."
 No utilices tus conocimientos externos para complementar información que no esté directamente sustentada en el contexto.
 {history_str}
 Contexto:
