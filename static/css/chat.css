@@ -98,6 +98,17 @@
 .bubble p:last-child { margin-bottom: 0; }
 .bubble ul, .bubble ol { margin-left: 1.2rem; margin-bottom: 0.65rem; }
 .bubble li { margin-bottom: 0.2rem; }
+
+/* Links inside bubbles */
+.bubble a {
+    color: #64b5f6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.18s ease;
+}
+.bubble a:hover {
+    color: #90caf9;
+}
 .bubble strong { font-weight: 700; }
 .bubble code {
     background: rgba(255, 255, 255, 0.07);
