@@ -1,0 +1,11 @@
+N8N:
+Uso n8n en IPTV Perú SAC para automatizar el procesamiento de reportes y consumo de APIs, conectándolos con bases de datos y Power BI, lo que eliminó el error humano. En mi infraestructura de servidores, lo ejecuto en contenedores Docker aislados utilizando el nodo Execute Command para manipular archivos de configuración y automatizar backups sin intervención manual. Finalmente, lo aplico en mis agentes de IA para centralizar, clasificar y archivar tareas administrativas que recibo por correo o formularios, logrando una automatización total de mi flujo de trabajo.
+
+Claude: 
+Es mi modelo principal para desarrollo y escritura técnica. Utilizo la funcionalidad de "Projects" para cargar documentación específica de mis repositorios, permitiendo que el modelo genere código contextualizado y preciso. Lo empleo para tareas complejas, diseño de interfaces en Flutter y como asistente en la arquitectura de mis soluciones.
+
+Antigravity:
+Lo uso para construir experiencias basadas en agentes. Aprovecho su CLI y SDK para el prototipado rápido y el desarrollo de flujos de trabajo orientados a agentes, permitiéndome pasar de la idea a un sistema funcional de manera acelerada.
+
+Codex: 
+Lo tengo integrado en mi entorno de desarrollo mediante conectores de GitHub. Lo utilizo principalmente para la asistencia en la escritura de código, acelerando la implementación de bloques lógicos y resolviendo estructuras repetitivas dentro de mis proyectos.
