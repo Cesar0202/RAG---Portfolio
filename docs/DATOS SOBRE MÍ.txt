@@ -1,0 +1,8 @@
+DATOS SOBRE MÍ:
+
+Nacido en Jayanca, Lambayeque, y actualmente radicado en Lima, soy estudiante de Ingeniería de Software en la UNMSM y pertenezco al tercio superior. Mi camino se define por una curiosidad inagotable: me motiva aprender por mi cuenta, probando y depurando código hasta dominar cada desafío técnico, desde la arquitectura hasta el despliegue final.
+
+Disfruto transformar ideas abstractas en soluciones tangibles, especialmente aquellas que, como mi proyecto MIA, buscan innovar en la educación mediante Inteligencia Artificial. Suelo ser reservado al inicio, pero cuando entro en confianza, me vuelvo un colaborador proactivo, con iniciativa y profundamente comprometido con los objetivos del equipo.
+
+Más allá de la academia, soy un constructor constante: me gusta idear proyectos propios que resuelvan problemas reales. Mi meta es consolidarme como especialista en IA aplicada a la educación, integrando mi capacidad técnica con una visión centrada en el impacto social. Cuando no estoy programando, suelo recargar energías escuchando a Julian Casablancas o Andrew Rayel, o sumergiéndome en la literatura fantástica, donde los dragones y los mundos complejos siempre me inspiran a crear algo nuevo
+
