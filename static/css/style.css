@@ -291,22 +291,24 @@ header {
         flex-direction: column;
         overflow-y: auto;
     }
-    .left-panel {
+    .profile-sidebar {
         width: 100%;
         max-width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
-        padding: 1rem;
+        padding: 1rem 1rem 2rem 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow: visible;
+        height: auto;
     }
     .profile-card, .tech-sheet-card {
         width: 100%;
         max-width: 400px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
-    .right-panel {
+    .tabs-wrapper {
         width: 100%;
         flex: 1 1 auto;
         min-height: 500px;
