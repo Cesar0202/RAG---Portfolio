@@ -4,7 +4,8 @@ from app.config import settings
 async def call_gemini_api(prompt: str) -> str:
     """Realiza una petición directa por HTTP a la API de Google Gemini (3.1 Flash Lite)."""
     if not settings.GEMINI_API_KEY or settings.GEMINI_API_KEY == "tu_gemini_api_key_aqui":
-        return "Error: No se ha configurado la clave GEMINI_API_KEY en tu archivo .env. Por favor, edita tu archivo .env y agrega una clave válida."
+        print("ERROR INTERNO: No se ha configurado la clave GEMINI_API_KEY en .env")
+        return "Disculpa, en este momento no puedo procesar tu mensaje (Mantenimiento técnico). Por favor, intenta más tarde."
 
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={settings.GEMINI_API_KEY}"
     headers = {"Content-Type": "application/json"}
@@ -41,14 +42,17 @@ async def call_gemini_api(prompt: str) -> str:
                     error_detail = error_json.get("error", {}).get("message", error_detail)
                 except Exception:
                     pass
-                return f"Error en la API de Gemini (Código {response.status_code}): {error_detail}"
+                print(f"ERROR INTERNO GEMINI (Código {response.status_code}): {error_detail}")
+                return "Disculpa, tuve un pequeño problema al conectarme a mi cerebro (Error de proveedor). Por favor, intenta más tarde."
     except httpx.RequestError as exc:
-        return f"Error de conexión con la API de Gemini: {exc}"
+        print(f"ERROR DE CONEXIÓN GEMINI: {exc}")
+        return "Disculpa, hay problemas de conexión en este momento. Por favor, intenta de nuevo en unos minutos."
 
 async def call_openai_api(prompt: str) -> str:
     """Realiza una petición directa por HTTP a la API de OpenAI (gpt-4o-mini)."""
     if not settings.OPENAI_API_KEY or settings.OPENAI_API_KEY == "tu_openai_api_key_aqui":
-        return "Error: No se ha configurado la clave OPENAI_API_KEY en tu archivo .env. Por favor, edita tu archivo .env y agrega una clave válida."
+        print("ERROR INTERNO: No se ha configurado la clave OPENAI_API_KEY en .env")
+        return "Disculpa, en este momento no puedo procesar tu mensaje (Mantenimiento técnico). Por favor, intenta más tarde."
 
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
@@ -80,9 +84,11 @@ async def call_openai_api(prompt: str) -> str:
                     error_detail = error_json.get("error", {}).get("message", error_detail)
                 except Exception:
                     pass
-                return f"Error en la API de OpenAI (Código {response.status_code}): {error_detail}"
+                print(f"ERROR INTERNO OPENAI (Código {response.status_code}): {error_detail}")
+                return "Disculpa, tuve un pequeño problema al conectarme a mi cerebro (Error de proveedor). Por favor, intenta más tarde."
     except httpx.RequestError as exc:
-        return f"Error de conexión con la API de OpenAI: {exc}"
+        print(f"ERROR DE CONEXIÓN OPENAI: {exc}")
+        return "Disculpa, hay problemas de conexión en este momento. Por favor, intenta de nuevo en unos minutos."
 
 async def generate_llm_response(prompt: str) -> str:
     """Función de orquestación para llamar al proveedor de LLM configurado."""
