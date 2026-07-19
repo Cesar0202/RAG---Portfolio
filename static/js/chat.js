@@ -22,6 +22,9 @@ function handleKey(e) {
     }
 }
 
+// Historial de la conversación para dar "memoria" al bot
+let chatHistory = [];
+
 // Enviar Mensaje del Chat
 async function sendMessage() {
     const input = document.getElementById('chat-input');
@@ -69,11 +72,14 @@ async function sendMessage() {
     appendMessage(query, 'user');
     const loadingBubbleId = appendLoadingBubble();
     
+    // Guardar el mensaje del usuario en el historial
+    chatHistory.push({role: "user", content: query});
+    
     try {
         const response = await fetch('/query', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question: query })
+            body: JSON.stringify({ question: query, history: chatHistory })
         });
 
         removeLoadingBubble(loadingBubbleId);
@@ -81,6 +87,8 @@ async function sendMessage() {
         if (response.ok) {
             const data = await response.json();
             appendMessage(data.response, 'bot', data.sources);
+            // Guardar la respuesta del bot en el historial
+            chatHistory.push({role: "assistant", content: data.response});
         } else {
             appendMessage("❌ Lo siento, ocurrió un error en el servidor al intentar responder.", 'bot');
         }
@@ -160,15 +168,19 @@ function clearChat() {
     const area = document.getElementById('messages');
     if (!area) return;
     area.innerHTML = `
-        <div class="message">
-            <div class="avatar avatar-bot">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="bubble">
-                <p>¡Hola! He limpiado la conversación. ¿En qué te puedo ayudar ahora?</p>
+        <div class="message bot">
+            <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+            <div class="message-content">
+                ¡Hola! Soy César Huamán. ¿En qué te puedo ayudar hoy?
             </div>
         </div>
     `;
+    
+    // Reiniciar la memoria del bot
+    if (typeof chatHistory !== 'undefined') {
+        chatHistory = [];
+    }
+    
     const input = document.getElementById('chat-input');
     if (input) {
         input.value = '';
