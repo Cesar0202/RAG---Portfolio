@@ -1,0 +1,3 @@
+El protocolo de seguridad Omega-45 establece que el código de acceso súper secreto para el servidor de desarrollo en la nube es '9982-BLUE-ALPHA'.
+Este código cambia mensualmente y solo debe ser compartido con personal de nivel 3.
+El responsable directo de la infraestructura es el ingeniero Juan Pérez.

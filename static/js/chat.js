@@ -53,7 +53,6 @@ async function sendMessage() {
             document.getElementById('admin-dashboard').style.display = 'flex';
             
             loadProjects();
-            showToast("🔑 Acceso Administrativo Desbloqueado", "success");
             
             if (adminBtn) {
                 switchTab(adminBtn, 'section-admin');

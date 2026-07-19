@@ -59,12 +59,12 @@ function logoutAdmin() {
     const dashboard = document.getElementById('admin-dashboard');
     const login = document.getElementById('admin-login');
     const passInput = document.getElementById('admin-password');
+    const adminBtn = document.getElementById('nav-admin-btn');
     
     if(dashboard) dashboard.style.display = 'none';
     if(login) login.style.display = 'block';
     if(passInput) passInput.value = '';
-    
-    showToast("Sesión cerrada.", "success");
+    if(adminBtn) adminBtn.style.display = 'none';
     
     // Regresar al inicio
     const chatBtn = document.querySelector('.nav-icon[onclick*="section-chat"]');
