@@ -24,6 +24,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+async def startup_event():
+    # Cargar el modelo de embeddings de forma ansiosa para evitar demoras en la primera consulta
+    from app.embeddings import embeddings_manager
+    _ = embeddings_manager.model
+
+
 # Modelos de datos para las peticiones
 class QueryRequest(BaseModel):
     question: str
@@ -144,7 +151,7 @@ async def query_rag(request: QueryRequest):
 Usa la información de los siguientes fragmentos del contexto para responder la pregunta del usuario. NO inventes información que no esté en el contexto.
 IMPORTANTE: Cuando te pregunten sobre tu experiencia laboral, dale prioridad a tus logros y rol en "IPTV PERU", extrayendo detalles precisos del contexto. Menciona a "Agroindustrial BETA" de pasada.
 IMPORTANTE: Cuando te pregunten "sobre ti" o "cuéntame de ti", incluye tanto tus capacidades profesionales como tu lado PERSONAL (tus gustos, pasatiempos o historia de vida que estén en el contexto).
-IMPORTANTE: Si te preguntan por herramientas o habilidades, busca exhaustivamente en el contexto y lístalas.
+IMPORTANTE: Si te preguntan por herramientas, habilidades o proyectos, busca exhaustivamente en el contexto y lístalas SIEMPRE usando viñetas (bullet points) para que la lectura sea estructurada y no un bloque de texto amontonado.
 IMPORTANTE: Debes ser CONCISO y DIRECTO. Resume la información en respuestas muy cortas (1 o 2 párrafos). Evita detalles excesivos y generalidades ambiguas.
 Si la información en el contexto no es suficiente para responder la pregunta, di exactamente: "No encontré suficiente información en los documentos cargados para responder a esa pregunta."
 No utilices tus conocimientos externos para complementar información que no esté directamente sustentada en el contexto.
