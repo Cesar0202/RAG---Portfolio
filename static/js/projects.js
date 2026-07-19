@@ -80,12 +80,41 @@ async function loadProjects() {
     }
 }
 
-// Convierte un archivo de imagen a Base64
+// Convierte un archivo de imagen a Base64 y lo redimensiona/comprime
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                const maxWidth = 800;
+                const maxHeight = 800;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth || height > maxHeight) {
+                    if (width > height) {
+                        height = Math.round(height * (maxWidth / width));
+                        width = maxWidth;
+                    } else {
+                        width = Math.round(width * (maxHeight / height));
+                        height = maxHeight;
+                    }
+                }
+
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Comprimir como JPEG para reducir drásticamente el peso
+                resolve(canvas.toDataURL('image/jpeg', 0.8));
+            };
+            img.onerror = error => reject(error);
+            img.src = event.target.result;
+        };
         reader.onerror = error => reject(error);
     });
 }
