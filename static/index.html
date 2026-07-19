@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio & RAG Engine</title>
+
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Hojas de Estilos Modularizadas -->
+    <link rel="stylesheet" href="/static/css/style.css?v=21">
+    <link rel="stylesheet" href="/static/css/components.css?v=21">
+    <link rel="stylesheet" href="/static/css/chat.css?v=21">
+    <!-- Scripts Modularizados (también cache-bust) -->
+    <script src="/static/js/app.js?v=21" defer></script>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Barra Lateral Izquierda (Navegación SPA) -->
+        <nav class="nav-sidebar">
+            <div class="nav-icons-top" style="margin-top: 1rem;">
+                <!-- Icono de Chat -->
+                <div class="nav-icon active" onclick="switchTab(this, 'section-chat')">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span class="nav-label">Chat</span>
+                </div>
+                <!-- Icono de Galería de Proyectos -->
+                <div class="nav-icon" onclick="switchTab(this, 'section-projects')">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span class="nav-label">Proyectos</span>
+                </div>
+                <!-- Icono de Skills -->
+                <div class="nav-icon" onclick="switchTab(this, 'section-skills')">
+                    <i class="fa-solid fa-brain"></i>
+                    <span class="nav-label">Skills</span>
+                </div>
+                <!-- Icono de Contacto -->
+                <div class="nav-icon" onclick="switchTab(this, 'section-feedback')">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span class="nav-label">Contacto</span>
+                </div>
+                <!-- Icono de Descargar CV -->
+                <a href="/static/cv_Cesar-Huaman-Uriarte.pdf" download="cv_Cesar-Huaman-Uriarte.pdf" class="nav-icon" style="text-decoration: none; width: 100%;">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span class="nav-label">Descargar CV</span>
+                </a>
+                <!-- Icono de Administrador (Protegido) -->
+                <div class="nav-icon" id="nav-admin-btn" style="display: none;" onclick="switchTab(this, 'section-admin')">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span class="nav-label">Admin</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Workspace Principal -->
+        <div class="main-workspace">
+            <header>
+                <div class="logo">
+                    <h1 id="workspace-title">RAG Engine <span>Chat</span></h1>
+                </div>
+            </header>
+
+            <div class="container">
+                <!-- Sidebar de Perfil de César (Fijo en todas las pestañas) -->
+                <aside class="profile-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-avatar-large">
+                            <img src="/static/images/profile.png" alt="César Huamán" style="width: 100%; height: auto; border-radius: 12px; display: block;">
+                        </div>
+                        <h2>Cesar Huaman Uriarte</h2>
+                        <p class="profile-title">Desarrollador de Software</p>
+                        <p class="profile-institution">Univ. Nacional Mayor de San Marcos</p>
+                        
+                        <div class="profile-socials">
+                            <a href="https://github.com/Cesar0202" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/cesar-huriarte/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="mailto:alce02100@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-sheet-card">
+                        <h3>Sobre mí</h3>
+                        <div class="about-me-text" style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; text-align: center; margin-top: 0.4rem;">
+                            Estudiante de 9.° ciclo de Ingeniería de Software en la UNMSM, especializado en desarrollo de software, inteligencia artificial y automatización de procesos.
+                        </div>
+                    </div>
+
+                </aside>
+
+                <!-- Wrapper de Pestañas SPA -->
+                <div class="tabs-wrapper">
+                    
+                    <!-- SECCIÓN 1: CHAT INTERACTIVO -->
+                    <div id="section-chat" class="tab-content active">
+                        <main class="chat-container">
+                            <div id="messages" class="messages-area">
+                                <div class="message">
+                                    <div class="avatar avatar-bot">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </div>
+                                    <div class="bubble">
+                                        ¡Hola! Bienvenido. Soy César. He integrado mi currículum, historia de vida y proyectos en este chat inteligente. Puedes consultarme sobre cualquiera de ellos. :D
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-suggestions" style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; padding: 0 1rem;">
+                                <button class="suggestion-btn" style="width: auto; transform: none; border-radius: 20px; font-size: 0.75rem;" onclick="sendSuggestion('Resúmeme el perfil profesional de César')">
+                                    <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 0.2rem;"></i> ¿Cuál es el perfil de César?
+                                </button>
+                                <button class="suggestion-btn" style="width: auto; transform: none; border-radius: 20px; font-size: 0.75rem;" onclick="sendSuggestion('¿Tiene proyectos de tesis o de fin de carrera?')">
+                                    <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 0.2rem;"></i> ¿Tiene proyectos de tesis?
+                                </button>
+                                <button class="suggestion-btn" style="width: auto; transform: none; border-radius: 20px; font-size: 0.75rem;" onclick="sendSuggestion('Detalla su experiencia laboral y competencias técnicas')">
+                                    <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 0.2rem;"></i> ¿Qué experiencia domina?
+                                </button>
+                            </div>
+
+                            <div class="input-area">
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; max-width: 600px; margin: 0 auto;">
+                                    <div class="input-wrapper" style="margin: 0; flex: 1;">
+                                        <textarea id="chat-input" placeholder="Pregúntame sobre tus documentos..." onkeydown="handleKey(event)"></textarea>
+                                        <button id="send-btn" class="send-btn" onclick="sendMessage()">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-danger" style="width: auto; padding: 0 1.25rem; border-radius: 9999px; height: 42px; font-size: 0.8rem; flex-shrink: 0;" onclick="clearChat()">
+                                        <i class="fa-solid fa-trash-can"></i> Vaciar Chat
+                                    </button>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+
+                    <!-- SECCIÓN 2: GALERÍA DE PROYECTOS -->
+                    <div id="section-projects" class="tab-content">
+                        <div class="projects-container">
+                            <div class="projects-header">
+                                <h3>Mis Proyectos</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.25rem;">
+                                    Galería de mis desarrollos y proyectos publicados. Puedes consultarle al bot sobre ellos.
+                                </p>
+                            </div>
+                            <div id="projects-grid" class="projects-grid">
+                                <!-- Renderizado dinámico desde JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN 3: HABILIDADES Y SKILLS -->
+                    <div id="section-skills" class="tab-content">
+                        <div class="skills-container">
+                            <div class="skills-header">
+                                <h3>Habilidades y Tecnologías</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.25rem;">
+                                    Lenguajes, frameworks y herramientas que utilizo en mis desarrollos.
+                                </p>
+                            </div>
+                            <div class="skills-grid">
+                                <div class="card skill-cat-card">
+                                    <h4>Lenguajes y Backend</h4>
+                                    <div class="skill-badges-grid">
+                                        <div class="skill-badge-item"><img src="/static/images/skills/python.svg" alt="Python" class="skill-icon"><span class="skill-badge-name">Python</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/js.svg" alt="JavaScript" class="skill-icon"><span class="skill-badge-name">JavaScript</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/typescript.svg" alt="TypeScript" class="skill-icon"><span class="skill-badge-name">TypeScript</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/node.svg" alt="NodeJS" class="skill-icon"><span class="skill-badge-name">NodeJS</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/express.svg" alt="Express" class="skill-icon"><span class="skill-badge-name">Express</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/php.svg" alt="PHP" class="skill-icon"><span class="skill-badge-name">PHP</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/sql.svg" alt="SQL" class="skill-icon"><span class="skill-badge-name">SQL</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/postgresql.svg" alt="PostgreSQL" class="skill-icon"><span class="skill-badge-name">PostgreSQL</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/mongodb.svg" alt="MongoDB" class="skill-icon"><span class="skill-badge-name">MongoDB</span></div>
+                                    </div>
+                                </div>
+                                <div class="card skill-cat-card">
+                                    <h4>Mobile y Frontend</h4>
+                                    <div class="skill-badges-grid">
+                                        <div class="skill-badge-item"><img src="/static/images/skills/flutter.svg" alt="Flutter" class="skill-icon"><span class="skill-badge-name">Flutter</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/react.svg" alt="React" class="skill-icon"><span class="skill-badge-name">React</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/html.svg" alt="HTML5" class="skill-icon"><span class="skill-badge-name">HTML5</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/css.svg" alt="CSS3" class="skill-icon"><span class="skill-badge-name">CSS3</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/tailwind.svg" alt="Tailwind" class="skill-icon"><span class="skill-badge-name">Tailwind</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/bootstrap.svg" alt="Bootstrap" class="skill-icon"><span class="skill-badge-name">Bootstrap</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/figma.svg" alt="Figma" class="skill-icon"><span class="skill-badge-name">Figma</span></div>
+                                    </div>
+                                </div>
+                                <div class="card skill-cat-card">
+                                    <h4>IA y Data Science</h4>
+                                    <div class="skill-badges-grid">
+                                        <div class="skill-badge-item"><img src="/static/images/skills/pandas.svg" alt="Pandas" class="skill-icon"><span class="skill-badge-name">Pandas</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/numpy.svg" alt="NumPy" class="skill-icon"><span class="skill-badge-name">NumPy</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/scikit-learn.svg" alt="Scikit-Learn" class="skill-icon"><span class="skill-badge-name">Scikit-Learn</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/airflow.svg" alt="Airflow" class="skill-icon"><span class="skill-badge-name">Airflow</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/excel.svg" alt="Excel" class="skill-icon"><span class="skill-badge-name">Excel</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/powerbi.svg" alt="Power BI" class="skill-icon"><span class="skill-badge-name">Power BI</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/claudecode.svg" alt="Claude Code" class="skill-icon"><span class="skill-badge-name">Claude Code</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/antigravity.svg" alt="Antigravity" class="skill-icon"><span class="skill-badge-name">Antigravity</span></div>
+                                    </div>
+                                </div>
+                                <div class="card skill-cat-card">
+                                    <h4>Herramientas y DevOps</h4>
+                                    <div class="skill-badges-grid">
+                                        <div class="skill-badge-item"><img src="/static/images/skills/git.svg" alt="Git" class="skill-icon"><span class="skill-badge-name">Git</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/docker.svg" alt="Docker" class="skill-icon"><span class="skill-badge-name">Docker</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/linux.svg" alt="Linux" class="skill-icon"><span class="skill-badge-name">Linux</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/postman.svg" alt="Postman" class="skill-icon"><span class="skill-badge-name">Postman</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/selenium.svg" alt="Selenium" class="skill-icon"><span class="skill-badge-name">Selenium</span></div>
+                                        <div class="skill-badge-item"><img src="/static/images/skills/n8n.svg" alt="N8N" class="skill-icon"><span class="skill-badge-name">N8N</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN 4: FORMULARIO DE CONTACTO -->
+                    <div id="section-feedback" class="tab-content">
+                        <div class="feedback-container">
+                            <div class="feedback-card">
+                                <h3>Contacto y Sugerencias</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.85rem; line-height: 1.4;">
+                                    ¿Tienes alguna duda, comentario o sugerencia? Rellena este formulario y tu mensaje se enviará directamente al administrador.
+                                </p>
+                                <form id="feedback-form" onsubmit="submitFeedback(event)">
+                                    <div class="form-group">
+                                        <label>Tu Nombre</label>
+                                        <input type="text" id="fb-name" required placeholder="Ej. Cristiano Ronaldo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo Electrónico</label>
+                                        <input type="email" id="fb-email" required placeholder="Ej. cr7@ejemplo.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mensaje o Comentario</label>
+                                        <textarea id="fb-message" required placeholder="Escribe tu sugerencia, reporte de error o comentario aquí..." style="height: 110px; resize: none;"></textarea>
+                                    </div>
+                                    <button type="submit" id="fb-submit-btn" class="btn btn-primary" style="margin-top: 0.5rem;">
+                                        <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN 5: PANEL DE ADMINISTRACIÓN -->
+                    <div id="section-admin" class="tab-content">
+                        <!-- Login de Administrador -->
+                        <div id="admin-login" class="admin-login-container">
+                            <div class="login-card">
+                                <i class="fa-solid fa-lock animated-lock" style="font-size: 2.5rem; color: var(--accent-purple); margin-bottom: 1.5rem; display: inline-block;"></i>
+                                <h3 style="margin-bottom: 1.5rem;">Acceso Administrativo</h3>
+                                <div class="form-group">
+                                    <input type="password" id="admin-password" placeholder="Contraseña..." onkeydown="handleAdminLoginKey(event)">
+                                </div>
+                                <button class="btn btn-primary" onclick="verifyAdminPassword()" style="margin-top: 0.5rem;">
+                                    <i class="fa-solid fa-unlock"></i> Desbloquear Panel
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Panel Administrativo Desbloqueado -->
+                        <div id="admin-dashboard" class="admin-dashboard-container" style="display: none;">
+                            <aside class="admin-sidebar">
+                                <div class="card">
+                                    <h3>Gestión de Documentos</h3>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+                                        Sube archivos PDF o TXT desde tu navegador e indexa su contenido en ChromaDB.
+                                    </p>
+                                    <input type="file" id="file-uploader" accept=".pdf,.txt" style="display: none;" onchange="handleFileUpload(event)">
+                                    <button id="upload-btn" class="btn btn-accent" style="margin-bottom: 0.25rem;" onclick="document.getElementById('file-uploader').click()">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i> Subir Documento
+                                    </button>
+                                    <button id="ingest-btn" class="btn btn-primary" onclick="triggerIngest()">
+                                        <i class="fa-solid fa-arrows-rotate"></i> Ingestar Documentos
+                                    </button>
+                                </div>
+
+                                <div class="card" style="flex: 1; display: flex; flex-direction: column;">
+                                    <h3>Conocimiento Indexado</h3>
+                                    <ul id="file-list" class="file-list">
+                                        <!-- Renderizado dinámico -->
+                                    </ul>
+                                    <div style="margin-top: auto; padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                        <button id="clear-btn" class="btn btn-danger" onclick="triggerClear()">
+                                            <i class="fa-solid fa-trash-can"></i> Vaciar Base de Datos
+                                        </button>
+                                        <button id="logout-btn" class="btn" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1);" onclick="logoutAdmin()">
+                                            <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                                        </button>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <div class="admin-welcome-area">
+                                <div class="card" style="width: 100%; max-width: 600px; text-align: left;">
+                                    <h3>Publicar Proyecto en Portafolio</h3>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 1rem;">
+                                        Llena este formulario para añadir un nuevo proyecto en tiempo real a la pestaña pública de "Mis Proyectos".
+                                    </p>
+                                    <form id="admin-project-form" onsubmit="submitNewProject(event)">
+                                        <input type="hidden" id="proj-edit-index" value="">
+                                        <div class="form-group" style="margin-bottom: 0.75rem;">
+                                            <label style="font-size: 0.7rem;">Título del Proyecto</label>
+                                            <input type="text" id="proj-title" required placeholder="Ej. Mi Sistema Web" style="padding: 0.55rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0.75rem;">
+                                            <label style="font-size: 0.7rem;">Descripción Corta</label>
+                                            <textarea id="proj-desc" required placeholder="Describe brevemente el proyecto..." style="height: 60px; padding: 0.55rem 0.75rem; font-size: 0.82rem; border-radius: 8px; resize: none;"></textarea>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0.75rem;">
+                                            <label style="font-size: 0.7rem;">Tecnologías (separadas por comas)</label>
+                                            <input type="text" id="proj-techs" required placeholder="Ej. Flutter, FastAPI, Python" style="padding: 0.55rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                        </div>
+                                        <div style="display: flex; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                                <label style="font-size: 0.7rem;">Enlace a GitHub (Opcional)</label>
+                                                <input type="url" id="proj-github" placeholder="https://github.com/..." style="padding: 0.55rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                            </div>
+                                            <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                                                <label style="font-size: 0.7rem;">Enlace a Demo (Opcional)</label>
+                                                <input type="url" id="proj-demo" placeholder="https://demo.com/..." style="padding: 0.55rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 1rem;">
+                                            <label style="font-size: 0.7rem;">Imagen de Portada (Opcional)</label>
+                                            <input type="file" id="proj-image" accept="image/*" style="padding: 0.4rem; font-size: 0.78rem;">
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button type="submit" id="proj-submit-btn" class="btn btn-primary" style="flex: 1;">
+                                                <i class="fa-solid fa-circle-plus"></i> Publicar Proyecto
+                                            </button>
+                                            <button type="button" id="proj-cancel-btn" class="btn btn-danger" style="display: none; width: auto;" onclick="cancelProjectEdit()">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer del Portafolio (zona derecha) -->
+                    <footer class="app-footer">
+                        <p>© 2026 <strong>César Huamán</strong> — Portafolio RAG</p>
+                    </footer>
+                </div> <!-- Fin tabs-wrapper -->
+            </div> <!-- Fin container -->
+        </div> <!-- Fin main-workspace -->
+    </div> <!-- Fin app-wrapper -->
+
+    <!-- Toast Notifications Component -->
+    <div id="toast" class="toast">
+        <i id="toast-icon" class="fa-solid"></i>
+        <span id="toast-message">Mensaje</span>
+    </div>
+
+    <!-- Scripts Modularizados -->
+    <script src="/static/js/app.js?v=21"></script>
+    <script src="/static/js/chat.js?v=21"></script>
+    <script src="/static/js/projects.js?v=21"></script>
+    <script src="/static/js/admin.js?v=21"></script>
+    <script src="/static/js/feedback.js?v=21"></script>
+</body>
+</html>

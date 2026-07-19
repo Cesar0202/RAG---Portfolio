@@ -1,0 +1,633 @@
+/* ==========================================
+   Tasklyn Components - EXACT MATCH
+   White cards on periwinkle bg
+   Pastel blue + peach accent cards
+   No purple on normal text/elements
+   ========================================== */
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+.btn {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.86rem;
+    transition: all 0.18s ease;
+    font-family: var(--font-body);
+}
+
+.btn-primary {
+    background: var(--nav-active-bg);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(25, 36, 56, 0.28);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(25, 36, 56, 0.38); }
+
+.btn-accent {
+    background: #ededf7;
+    color: var(--accent-purple);
+    border: 1px solid #dddaf2;
+}
+.btn-accent:hover { background: var(--accent-purple); color: #fff; }
+
+.btn-danger {
+    background: #4b6587 !important;
+    color: #ffffff !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.btn-danger:hover { background: #3a5078 !important; color: #fff !important; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(25, 36, 56, 0.3) !important; }
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
+
+/* ==========================================
+   PROFILE SIDEBAR (panel izquierdo)
+   ========================================== */
+.profile-sidebar {
+    width: 416px;
+    background: transparent;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.1rem;
+    overflow-y: auto;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+/* WHITE CARD base */
+.profile-card,
+.tech-sheet-card,
+.suggestions-card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 22px;
+    box-shadow: var(--shadow-card);
+}
+
+.profile-card {
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Avatar: Full image */
+.profile-avatar-large {
+    width: 100%;
+    max-width: 140px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+}
+
+.profile-card h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Title: light version of main color */
+.profile-title {
+    font-size: 0.88rem;
+    color: #7695c4;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+.profile-institution {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.profile-socials {
+    display: flex;
+    gap: 1.1rem;
+    margin-top: 0.9rem;
+}
+
+.profile-socials a {
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    transition: color 0.18s, transform 0.18s;
+}
+.profile-socials a:hover { color: var(--text-primary); transform: scale(1.12); }
+
+/* About & Suggestions cards */
+.tech-sheet-card {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.tech-sheet-card h3 {
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tech-sheet-card h3 i { color: var(--text-secondary); }
+
+.suggestions-card {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.suggestions-card h3 {
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.suggestions-card h3 i { color: var(--text-secondary); }
+
+.suggestion-list { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.suggestion-btn {
+    background: #f4f5fb;
+    border: 1px solid #e8eaf0;
+    color: var(--text-primary);
+    border-radius: 16px;
+    padding: 0.55rem 0.85rem;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    line-height: 1.3;
+}
+.suggestion-btn:hover {
+    background: #ededf7;
+    border-color: #d0ccee;
+    color: var(--text-primary);
+    transform: translateX(3px);
+}
+
+/* ==========================================
+   PROJECTS TAB
+   ========================================== */
+.projects-container {
+    flex: 1;
+    padding: 1.75rem;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.projects-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 22px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    position: relative;
+}
+.project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+/* Alternating pastel accent: blue / peach (like Tasklyn task cards) */
+.project-card:nth-child(odd)  { border-top: 3px solid #b8cff0; }
+.project-card:nth-child(even) { border-top: 3px solid #f0c5b0; }
+
+.project-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.project-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+.project-techs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* Tech badges: light gray — clean like Tasklyn */
+.tech-badge {
+    background: #f0f2fb;
+    border: 1px solid #e0e3f5;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.project-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.project-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    background: #f0f2fb;
+    border: 1px solid #e0e3f5;
+    border-radius: 9999px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.18s ease;
+}
+.project-link-btn:hover { background: var(--nav-active-bg); color: #fff; border-color: var(--nav-active-bg); }
+
+.btn-delete-project {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: var(--danger-color);
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.18s ease; z-index: 10;
+}
+.btn-delete-project:hover { background: var(--danger-color); color: #fff; }
+
+.btn-edit-project {
+    position: absolute; top: 1rem; right: 3.2rem;
+    background: #ededf7;
+    border: 1px solid #dddaf2;
+    color: var(--accent-purple);
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.18s ease; z-index: 10;
+}
+.btn-edit-project:hover { background: var(--accent-purple); color: #fff; }
+
+/* ==========================================
+   SKILLS TAB
+   ========================================== */
+.skills-container {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+.skills-header { padding-bottom: 0.5rem; }
+
+.skills-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+}
+
+/* 4 distinct pastel skill category cards — EXACT Tasklyn palette */
+.skill-cat-card {
+    border-radius: 22px;
+    padding: 1.2rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.skill-cat-card:nth-child(1) { background: #dce9f8; }
+.skill-cat-card:nth-child(1) h4 { color: #2060a8; }
+
+.skill-cat-card:nth-child(2) { background: #f5d5c5; }
+.skill-cat-card:nth-child(2) h4 { color: #b04020; }
+
+.skill-cat-card:nth-child(3) { background: #ede8f7; }
+.skill-cat-card:nth-child(3) h4 { color: #6040b0; }
+
+.skill-cat-card:nth-child(4) { background: #d5eee8; }
+.skill-cat-card:nth-child(4) h4 { color: #1a7055; }
+
+.skill-cat-card h4 {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.skill-badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    overflow-y: auto;
+    align-content: flex-start;
+    flex: 1;
+}
+
+.skill-badge-item {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 14px;
+    padding: 0.55rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1 1 calc(33% - 0.5rem);
+    min-width: 105px;
+    transition: all 0.18s ease;
+}
+.skill-badge-item:hover { background: rgba(255,255,255,0.95); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+.skill-icon { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+
+.skill-badge-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ==========================================
+   FORMS & INPUTS
+   ========================================== */
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-group label {
+    font-size: 0.71rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+    background: #f4f5fb;
+    border: 1px solid #e0e3f5;
+    border-radius: 16px;
+    color: var(--text-primary);
+    padding: 0.7rem 1rem;
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group textarea {
+    background: rgba(255,255,255,0.05);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(139, 125, 216, 0.12);
+}
+
+/* ==========================================
+   FEEDBACK
+   ========================================== */
+.feedback-container {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.feedback-card {
+    width: 460px;
+    background: var(--card-bg);
+    border: none;
+    border-radius: 22px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+}
+
+/* ==========================================
+   ADMIN
+   ========================================== */
+.admin-login-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.login-card {
+    width: 340px;
+    background: var(--card-bg);
+    border: none;
+    border-radius: 22px;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+.animated-lock {
+    animation: lockPulse 2s infinite ease-in-out;
+}
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.06); opacity: 1; }
+}
+
+.admin-dashboard-container { 
+    width: 100%; 
+    height: 100%; 
+    display: flex;
+    overflow: hidden;
+}
+
+.admin-sidebar {
+    width: 360px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-right: 1px solid var(--border-color);
+    background: transparent;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.admin-welcome-area {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.file-list {
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.file-item {
+    background: #f4f5fb;
+    border: 1px solid #e0e3f5;
+    border-radius: 14px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    word-break: break-all;
+    color: var(--text-secondary);
+}
+
+.file-item i { color: var(--text-secondary); }
+
+.empty-files {
+    text-align: center;
+    font-size: 0.79rem;
+    color: var(--text-muted);
+    padding: 1.5rem 0;
+}
+
+/* ==========================================
+   GENERIC CARD (fallback)
+   ========================================== */
+.card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 22px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+}
+
+/* ==========================================
+   DARK MODE OVERRIDES
+   ========================================== */
+
+/* Skill category cards in dark mode: use translucent versions */
+.skill-cat-card:nth-child(1) { background: rgba(91, 155, 213, 0.15); border-color: rgba(91, 155, 213, 0.2); }
+.skill-cat-card:nth-child(1) h4 { color: #7fb8e8; }
+
+.skill-cat-card:nth-child(2) { background: rgba(232, 123, 106, 0.15); border-color: rgba(232, 123, 106, 0.2); }
+.skill-cat-card:nth-child(2) h4 { color: #e8a096; }
+
+.skill-cat-card:nth-child(3) { background: rgba(139, 125, 216, 0.18); border-color: rgba(139, 125, 216, 0.25); }
+.skill-cat-card:nth-child(3) h4 { color: #b0a0e0; }
+
+.skill-cat-card:nth-child(4) { background: rgba(93, 200, 168, 0.15); border-color: rgba(93, 200, 168, 0.2); }
+.skill-cat-card:nth-child(4) h4 { color: #7dd4b8; }
+
+/* Skill badge items in dark mode */
+.skill-badge-item {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.skill-badge-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Suggestion buttons dark mode */
+.suggestion-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+}
+.suggestion-btn:hover {
+    background: rgba(139, 125, 216, 0.2);
+    border-color: rgba(139, 125, 216, 0.3);
+}
+
+/* Project cards alternating accent in dark mode */
+.project-card:nth-child(odd)  { border-top: 3px solid rgba(91, 155, 213, 0.5); }
+.project-card:nth-child(even) { border-top: 3px solid rgba(232, 123, 106, 0.5); }
+
+/* Tech badges dark mode */
+.tech-badge {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+}
+
+/* Project link button dark mode */
+.project-link-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+}
+
+/* Forms dark mode */
+.form-group input,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* File items dark mode */
+.file-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.07);
+}
