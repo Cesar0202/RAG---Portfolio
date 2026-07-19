@@ -216,11 +216,13 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
+    width: 85%;
+    margin: 0 auto;
 }
 
 .project-card-wrapper {
     perspective: 1000px;
-    height: 280px;
+    height: 238px;
     position: relative;
 }
 
