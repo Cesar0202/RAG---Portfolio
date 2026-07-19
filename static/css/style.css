@@ -141,6 +141,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     background: var(--bg-page);
+    padding-left: 1rem;
 }
 
 /* === HEADER === */

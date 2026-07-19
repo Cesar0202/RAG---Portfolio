@@ -53,7 +53,7 @@
    PROFILE SIDEBAR (panel izquierdo)
    ========================================== */
 .profile-sidebar {
-    width: 416px;
+    width: 374px;
     background: transparent;
     border-right: none;
     display: flex;
