@@ -214,27 +214,61 @@
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 
-.project-card {
+.project-card-wrapper {
+    perspective: 1000px;
+    height: 280px;
+    position: relative;
+}
+
+.project-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.project-card-wrapper:hover .project-card-inner {
+    transform: rotateY(180deg);
+}
+
+.project-card-front, .project-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
+}
+
+.project-card-front {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
     background: var(--card-bg);
-    border: none;
-    border-radius: 22px;
+    background-size: cover;
+    background-position: center;
+}
+
+.project-card-back {
+    background: var(--card-bg);
+    transform: rotateY(180deg);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-    position: relative;
+    gap: 0.75rem;
+    overflow-y: auto;
+    border-top: 3px solid var(--accent-purple);
 }
-.project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-/* Alternating pastel accent: blue / peach (like Tasklyn task cards) */
-.project-card:nth-child(odd)  { border-top: 3px solid #b8cff0; }
-.project-card:nth-child(even) { border-top: 3px solid #f0c5b0; }
+/* Alternating pastel accent */
+.project-card-wrapper:nth-child(odd) .project-card-back { border-top: 3px solid #b8cff0; }
+.project-card-wrapper:nth-child(even) .project-card-back { border-top: 3px solid #f0c5b0; }
 
 .project-card h4 {
     font-family: var(--font-heading);

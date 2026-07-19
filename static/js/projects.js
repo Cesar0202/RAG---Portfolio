@@ -35,31 +35,41 @@ async function loadProjects() {
                 ` : '';
                 
                 return `
-                    <div class="project-card" ${cardStyle} style="position: relative;">
+                    <div class="project-card-wrapper project-card">
                         ${editBtnHTML}
                         ${deleteBtnHTML}
-                        <div style="display: flex; flex-direction: column; gap: 0.5rem; text-shadow: ${hasImg ? '0 2px 4px rgba(0,0,0,0.8)' : 'none'};">
-                            <h4 style="${hasImg ? 'color: #ffffff; font-weight: 700;' : ''}">${proj.title}</h4>
-                            <p class="project-desc" style="${hasImg ? 'color: #e0e0e0;' : ''}">${proj.description}</p>
-                        </div>
-                        <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: auto; padding-top: 0.5rem;">
-                            <div class="project-techs">
-                                ${techs.map(t => `<span class="tech-badge" style="${hasImg ? 'background: rgba(207, 188, 255, 0.15); border-color: rgba(207, 188, 255, 0.35);' : ''}">${t}</span>`).join('')}
+                        <div class="project-card-inner">
+                            
+                            <!-- Lado Frontal: Imagen y Título -->
+                            <div class="project-card-front" style="${hasImg ? `background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%), url(${proj.image});` : ''}">
+                                <h4 style="color: ${hasImg ? '#ffffff' : 'var(--text-primary)'}; text-shadow: ${hasImg ? '0 2px 4px rgba(0,0,0,0.8)' : 'none'}; margin: 0;">${proj.title}</h4>
                             </div>
-                            ${(proj.github || proj.demo) ? `
-                                <div style="display: flex; gap: 0.5rem; width: 100%;">
-                                    ${proj.github ? `
-                                        <a href="${proj.github}" target="_blank" class="project-link-btn" style="${hasImg ? 'color: #ffffff; border-color: rgba(255,255,255,0.4);' : ''} flex: 1;">
-                                            <i class="fa-brands fa-github"></i> GitHub
-                                        </a>
-                                    ` : ''}
-                                    ${proj.demo ? `
-                                        <a href="${proj.demo}" target="_blank" class="project-link-btn" style="${hasImg ? 'color: #ffffff; border-color: rgba(255,255,255,0.4);' : ''} flex: 1;">
-                                            <i class="fa-solid fa-globe"></i> Demo
-                                        </a>
-                                    ` : ''}
+
+                            <!-- Lado Trasero: Descripción, Tecnologías y Enlaces -->
+                            <div class="project-card-back">
+                                <h4 style="color: var(--text-primary); margin-bottom: 0.25rem;">${proj.title}</h4>
+                                <p class="project-desc" style="flex: 1;">${proj.description}</p>
+                                
+                                <div class="project-techs" style="margin-top: auto; margin-bottom: 1rem;">
+                                    ${techs.map(t => `<span class="tech-badge">${t}</span>`).join('')}
                                 </div>
-                            ` : ''}
+                                
+                                ${(proj.github || proj.demo) ? `
+                                    <div style="display: flex; gap: 0.5rem; width: 100%;">
+                                        ${proj.github ? `
+                                            <a href="${proj.github}" target="_blank" class="project-link-btn" style="flex: 1; justify-content: center;">
+                                                <i class="fa-brands fa-github"></i> GitHub
+                                            </a>
+                                        ` : ''}
+                                        ${proj.demo ? `
+                                            <a href="${proj.demo}" target="_blank" class="project-link-btn" style="flex: 1; justify-content: center;">
+                                                <i class="fa-solid fa-globe"></i> Demo
+                                            </a>
+                                        ` : ''}
+                                    </div>
+                                ` : ''}
+                            </div>
+
                         </div>
                     </div>
                 `;
