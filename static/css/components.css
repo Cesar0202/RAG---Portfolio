@@ -86,7 +86,7 @@
 /* Avatar: Full image */
 .profile-avatar-large {
     width: 100%;
-    max-width: 110px;
+    max-width: 145px;
     background: transparent;
     border: none;
     display: flex;
