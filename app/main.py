@@ -128,6 +128,18 @@ async def query_rag(request: QueryRequest):
                 history_str += f"{role_name}: {msg.get('content')}\n"
             history_str += "\n--- Fin del historial ---\n"
 
+        # Inyectar proyectos dinámicamente en el contexto
+        try:
+            import json
+            with open("data/projects.json", "r", encoding="utf-8") as f:
+                projects_data = json.load(f)
+            if projects_data:
+                context_str += "\n--- MIS PROYECTOS DE PORTAFOLIO ---\n"
+                for p in projects_data:
+                    context_str += f"- Proyecto: {p.get('title', '')}\n  Descripción: {p.get('description', '')}\n  Tecnologías: {p.get('technologies', '')}\n"
+        except Exception:
+            pass
+
         prompt = f"""Tú eres César Huamán Uriarte. Debes responder siempre en primera persona (yo, mi, me, mis, etc.), hablando directamente como César.
 Usa la información de los siguientes fragmentos del contexto para responder la pregunta del usuario. NO inventes información que no esté en el contexto.
 IMPORTANTE: Cuando te pregunten sobre tu experiencia laboral, dale prioridad a tus logros y rol en "IPTV PERU", extrayendo detalles precisos del contexto. Menciona a "Agroindustrial BETA" de pasada.
