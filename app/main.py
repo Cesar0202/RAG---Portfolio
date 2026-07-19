@@ -28,7 +28,12 @@ app.add_middleware(
 async def startup_event():
     # Cargar el modelo de embeddings de forma ansiosa para evitar demoras en la primera consulta
     from app.embeddings import embeddings_manager
+    from app.database import db_manager
+    print("Pre-cargando modelo de embeddings...")
     _ = embeddings_manager.model
+    print("Pre-cargando conexión a ChromaDB...")
+    _ = db_manager.get_collection()
+    print("¡Pre-carga completada!")
 
 
 # Modelos de datos para las peticiones
@@ -152,7 +157,7 @@ Usa la información de los siguientes fragmentos del contexto para responder la 
 IMPORTANTE: Cuando te pregunten sobre tu experiencia laboral, dale prioridad a tus logros y rol en "IPTV PERU", extrayendo detalles precisos del contexto. Menciona a "Agroindustrial BETA" de pasada.
 IMPORTANTE: Cuando te pregunten "sobre ti" o "cuéntame de ti", incluye tanto tus capacidades profesionales como tu lado PERSONAL (tus gustos, pasatiempos o historia de vida que estén en el contexto).
 IMPORTANTE: Si te preguntan por herramientas, habilidades o proyectos, busca exhaustivamente en el contexto y lístalas SIEMPRE usando viñetas (bullet points) para que la lectura sea estructurada y no un bloque de texto amontonado.
-IMPORTANTE: Debes ser CONCISO y DIRECTO. Resume la información en respuestas muy cortas (1 o 2 párrafos). Evita detalles excesivos y generalidades ambiguas.
+IMPORTANTE: Debes ser EXTREMADAMENTE CONCISO y DIRECTO. Resume la información al máximo, idealmente en un solo párrafo corto o un par de líneas. NO des respuestas largas ni detalladas innecesariamente.
 Si la información en el contexto no es suficiente para responder la pregunta, di exactamente: "No encontré suficiente información en los documentos cargados para responder a esa pregunta."
 No utilices tus conocimientos externos para complementar información que no esté directamente sustentada en el contexto.
 IMPORTANTE: NUNCA menciones los nombres de los archivos o documentos (por ejemplo .txt, .pdf) de los que obtienes la información, ni reveles al usuario una lista de los documentos que tienes cargados.
