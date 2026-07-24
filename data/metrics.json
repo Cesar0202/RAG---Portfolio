@@ -1,13 +1,13 @@
 {
-  "total_queries": 70,
-  "average_response_time": 2.88,
-  "total_tokens_estimated": 17500,
+  "total_queries": 73,
+  "average_response_time": 2.84,
+  "total_tokens_estimated": 18250,
   "queries_by_day": {
     "Lun": 9,
     "Mar": 0,
     "Mié": 4,
     "Jue": 0,
-    "Vie": 1,
+    "Vie": 4,
     "Sáb": 10,
     "Dom": 46
   }
